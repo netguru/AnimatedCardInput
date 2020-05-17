@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "netguru-logo-single-n.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

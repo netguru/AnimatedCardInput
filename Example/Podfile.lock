@@ -1,0 +1,16 @@
+PODS:
+  - AnimatedCardInput (0.1.0)
+
+DEPENDENCIES:
+  - AnimatedCardInput (from `../`)
+
+EXTERNAL SOURCES:
+  AnimatedCardInput:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AnimatedCardInput: 8774fc1c1d250542c4a50f475775e47034140653
+
+PODFILE CHECKSUM: 8975e7ac366a4532f3ec06628a45c9b29bb59d6f
+
+COCOAPODS: 1.9.0
