@@ -152,6 +152,18 @@ public class CardInputsView: UIScrollView {
         set(font) { updateInputFont(font) }
     }
 
+    /// Color of tint for text field.
+    public var inputTintColor: UIColor? {
+        get { cardNumberField.inputField.tintColor }
+        set(color) { updateTintColor(color) }
+    }
+
+    /// Color of border for text field.
+    public var inputBorderColor: CGColor? {
+        get { cardNumberField.inputField.layer.borderColor }
+        set(color) { updateBorderColor(color) }
+    }
+
     // MARK: Initializers
 
     /// Initializes CardInputsView.
@@ -265,6 +277,24 @@ public class CardInputsView: UIScrollView {
             validityDateField,
             CVVNumberField,
         ].forEach { $0.inputField.font = font }
+    }
+
+    private func updateTintColor(_ color: UIColor?) {
+        [
+            cardNumberField,
+            cardholderNameField,
+            validityDateField,
+            CVVNumberField,
+        ].forEach { $0.inputField.tintColor = color }
+    }
+
+    private func updateBorderColor(_ color: CGColor?) {
+        [
+            cardNumberField,
+            cardholderNameField,
+            validityDateField,
+            CVVNumberField,
+        ].forEach { $0.inputField.layer.borderColor = color }
     }
 
     private func updateCurrentInput(to type: TextFieldType) {

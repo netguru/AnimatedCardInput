@@ -21,6 +21,7 @@ public final class CardInputField: UIView {
     /// Label with title for Input Field.
     internal lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         return label
@@ -39,6 +40,7 @@ public final class CardInputField: UIView {
     /// Input Field.
     internal lazy var inputField: UITextField = {
         let textField = UITextField()
+        textField.textColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 24)
         textField.autocorrectionType = .no
