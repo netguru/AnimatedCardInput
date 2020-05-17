@@ -12,7 +12,10 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		607FACEC1AFB9204008FA782 /* CreditCardDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* CreditCardDataProviderTests.swift */; };
+		AE38FF952471942E00B3225C /* CreditCardDataDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE38FF942471942E00B3225C /* CreditCardDataDelegateTests.swift */; };
+		AE38FF972471966900B3225C /* CardViewInputDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE38FF962471966900B3225C /* CardViewInputDelegateTests.swift */; };
+		AE38FF99247198DA00B3225C /* CustomInputFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE38FF98247198D900B3225C /* CustomInputFieldTests.swift */; };
 		B508179E82C172FD1603E4A8 /* Pods_AnimatedCardInput_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6769E5865DC7B5E9D7412D5C /* Pods_AnimatedCardInput_Example.framework */; };
 		FD753DD73087A992E9E1C376 /* Pods_AnimatedCardInput_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E704C03E2F4BAF3FF9283B /* Pods_AnimatedCardInput_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -40,10 +43,13 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* AnimatedCardInput_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimatedCardInput_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		607FACEB1AFB9204008FA782 /* CreditCardDataProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardDataProviderTests.swift; sourceTree = "<group>"; };
 		6769E5865DC7B5E9D7412D5C /* Pods_AnimatedCardInput_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimatedCardInput_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E80C89903F568B4327324F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		A595B7F04A7EB795534BE567 /* Pods-AnimatedCardInput_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedCardInput_Example.debug.xcconfig"; path = "Target Support Files/Pods-AnimatedCardInput_Example/Pods-AnimatedCardInput_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		AE38FF942471942E00B3225C /* CreditCardDataDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreditCardDataDelegateTests.swift; path = ../../AnimatedCardInput/Classes/Protocols/CreditCardDataDelegateTests.swift; sourceTree = "<group>"; };
+		AE38FF962471966900B3225C /* CardViewInputDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardViewInputDelegateTests.swift; path = ../../AnimatedCardInput/Classes/Protocols/CardViewInputDelegateTests.swift; sourceTree = "<group>"; };
+		AE38FF98247198D900B3225C /* CustomInputFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputFieldTests.swift; sourceTree = "<group>"; };
 		B4E957734DB56C1E754269F8 /* AnimatedCardInput.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AnimatedCardInput.podspec; path = ../AnimatedCardInput.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B60AFA012BB9E99907EB7B97 /* Pods-AnimatedCardInput_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedCardInput_Tests.release.xcconfig"; path = "Target Support Files/Pods-AnimatedCardInput_Tests/Pods-AnimatedCardInput_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DA9BD7D65BB09F85CF1F3703 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -115,7 +121,10 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				AE38FF962471966900B3225C /* CardViewInputDelegateTests.swift */,
+				AE38FF942471942E00B3225C /* CreditCardDataDelegateTests.swift */,
+				607FACEB1AFB9204008FA782 /* CreditCardDataProviderTests.swift */,
+				AE38FF98247198D900B3225C /* CustomInputFieldTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -340,7 +349,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				AE38FF99247198DA00B3225C /* CustomInputFieldTests.swift in Sources */,
+				607FACEC1AFB9204008FA782 /* CreditCardDataProviderTests.swift in Sources */,
+				AE38FF952471942E00B3225C /* CreditCardDataDelegateTests.swift in Sources */,
+				AE38FF972471966900B3225C /* CardViewInputDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

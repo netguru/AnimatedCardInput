@@ -16,7 +16,7 @@
     "tag": "0.1.0"
   },
   "social_media_url": "https://www.netguru.com/codestories/topic/ios",
-  "swift_versions": "5.2",
+  "swift_versions": "5.0",
   "platforms": {
     "ios": "11.0"
   },
@@ -26,5 +26,5 @@
       "AnimatedCardInput/Assets/*.png"
     ]
   },
-  "swift_version": "5.2"
+  "swift_version": "5.0"
 }

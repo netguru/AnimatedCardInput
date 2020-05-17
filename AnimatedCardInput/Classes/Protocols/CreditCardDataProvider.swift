@@ -7,5 +7,5 @@
 public protocol CreditCardDataProvider: class {
 
     /// Object representing data of the Credit Card.
-    var creditCardData: CreditCardData? { get }
+    var creditCardData: CreditCardData { get }
 }
