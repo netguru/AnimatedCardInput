@@ -386,14 +386,14 @@ extension CardInputsView: CreditCardDataDelegate {
 extension CardInputsView: CreditCardDataProvider {
 
     /// - SeeAlso: CreditCardDataProvider.creditCardData
-    public var creditCardData: CreditCardData? {
+    public var creditCardData: CreditCardData {
         guard
             let cardNumber =  cardNumberField.inputField.text,
             let cardholderName = cardholderNameField.inputField.text,
             let validityDate = validityDateField.inputField.text,
             let CVVNumber = CVVNumberField.inputField.text
         else {
-            return nil
+            return CreditCardData()
         }
         return CreditCardData(
             cardNumber: cardNumber,

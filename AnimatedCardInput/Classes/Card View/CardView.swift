@@ -528,14 +528,14 @@ extension CardView: CreditCardDataDelegate {
 extension CardView: CreditCardDataProvider {
 
     /// - SeeAlso: CreditCardDataProvider.creditCardData
-    public var creditCardData: CreditCardData? {
+    public var creditCardData: CreditCardData {
         guard
             let cardNumber = frontSideContainer.cardNumberField.text,
             let cardholderName = frontSideContainer.cardholderNameField.text,
             var validityDate = frontSideContainer.validityDateField.text,
             let CVVNumber = backSideContainer.CVVNumberField.text
         else {
-            return nil
+            return CreditCardData()
         }
         if validityDate.count > 2 {
             validityDate.insert("/", at: validityDate.index(validityDate.startIndex, offsetBy: 2))

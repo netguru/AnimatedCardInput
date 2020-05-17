@@ -97,7 +97,7 @@ class ViewController: UIViewController {
     }
 
     @objc private func retrieveTapped() {
-        guard let data = cardView.creditCardData else { return }
+        let data = cardView.creditCardData
         previewTextView.text = "\(data.cardNumber)\n\(data.cardholderName)\n\(data.validityDate)\n\(data.CVVNumber)"
     }
 }
