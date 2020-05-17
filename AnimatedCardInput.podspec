@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/krysztalzg/AnimatedCardInput.git', :tag => s.version.to_s }
   s.social_media_url = 'https://www.netguru.com/codestories/topic/ios'
 
-  s.swift_versions = '5.2'
+  s.swift_versions = '5.0'
   s.ios.deployment_target = '11.0'
 
   s.source_files = 'AnimatedCardInput/Classes/**/*'
