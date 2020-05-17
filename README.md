@@ -5,7 +5,9 @@
 [![Swift 5.0](https://img.shields.io/badge/Swift-5.0-green.svg)](https://developer.apple.com/swift/)
 
 This library allows you to drop into your project two easily customisable, animated components that will make input of Credit Card information for users much better experience.
-
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/6009785/82155558-0a06c480-9876-11ea-8476-255bd00f3812.gif" width="350">
+</p>
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -28,6 +30,7 @@ pod 'AnimatedCardInput'
 Both components available in this Pod can be used either individually or in pair on one screen.
 
 ### Card View
+![cardViewBothsides](https://user-images.githubusercontent.com/6009785/82155437-4e459500-9875-11ea-8242-a09f83f7af52.png)
 To use Card View on our screen we simply initialise the view and place it in our hierarchy. This will create default credit card view, with 16-digit card number separated into blocks of 4 and CVV number limited to 3 digits.
 ```swift
 /// cardNumberDigitsLimit: Indicates maximum length of card number. Defaults to 16.
@@ -64,6 +67,7 @@ We can customise our card view in almost every way. Starting with the design, bo
 * `CVVNumberEmptyCharacter` - Character used as CVV Number Empty Character (defaults to "X").
 
 ### Card Inputs View
+![CardInputsViewCardholderName](https://user-images.githubusercontent.com/6009785/82155441-500f5880-9875-11ea-85f4-95920ff23e3d.png)
 To use Card Inputs View on our screen we simply initialise the view and place it in our hierarchy. This will create default default scroll view with four text fields and card number limited to 16 digits.
 ```swift
 let cardInputsView = CardInputsView(cardNumberDigitLimit: 16)
