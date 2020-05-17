@@ -6,7 +6,7 @@
 
 This library allows you to drop into your project two easily customisable, animated components that will make input of Credit Card information for users much better experience.
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/6009785/82155558-0a06c480-9876-11ea-8476-255bd00f3812.gif" width="350">
+	<img src="https://user-images.githubusercontent.com/6009785/82156049-4ab40d00-9879-11ea-9c1e-ef5ab53f94bd.gif" width="300">
 </p>
 ## Example
 
