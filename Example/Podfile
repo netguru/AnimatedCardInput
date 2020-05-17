@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AnimatedCardInput_Example' do
+  pod 'AnimatedCardInput', :path => '../'
+
+  target 'AnimatedCardInput_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
