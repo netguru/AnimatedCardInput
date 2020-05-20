@@ -106,6 +106,13 @@ public final class CardView: UIView {
         }
     }
 
+    /// Indicates if Validity Date input is validated when retrieving data.
+    public var validatesDateInput: Bool = true {
+        willSet {
+            frontSideContainer.validityDateField.validatesDateInput = newValue
+        }
+    }
+
     /// Image for the current card's provider.
     public var cardProviderImage: UIImage? {
         get { frontSideContainer.cardProviderImage }

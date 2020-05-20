@@ -10,6 +10,13 @@ public final class CardInputField: UIView {
 
     // MARK: Properties
 
+    /// Indicates if input should be checked for valid date value.
+    internal var validatesDateInput: Bool = false {
+        didSet {
+            validateDate()
+        }
+    }
+
     /// Indicates maximum length of input.
     private let inputLimit: Int
 
@@ -18,6 +25,13 @@ public final class CardInputField: UIView {
 
     /// Character used as date value separator.
     private let dateSeparator: String
+
+    /// Date formatter used to validate date input.
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM\(dateSeparator)YY"
+        return formatter
+    }()
 
     // MARK: Hierarchy
 
@@ -75,6 +89,7 @@ public final class CardInputField: UIView {
         setupViewHierarchy()
         setupLayoutConstraints()
         setupProperties()
+        setupBindings()
     }
 
     required init?(coder: NSCoder) {
@@ -140,6 +155,24 @@ public final class CardInputField: UIView {
 
     private func setupProperties() {
         isUserInteractionEnabled = true
+    }
+
+    private func setupBindings() {
+        inputField.addTarget(self, action: #selector(validateDate), for: .editingDidEnd)
+    }
+
+    // MARK: Private
+
+    @objc private func validateDate() {
+        guard
+            validatesDateInput,
+            let input = inputField.text,
+            dateFormatter.date(from: input) == nil
+        else {
+            return
+        }
+        inputField.text = ""
+        inputField.sendActions(for: .editingChanged)
     }
 }
 

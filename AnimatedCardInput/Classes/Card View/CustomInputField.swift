@@ -38,9 +38,17 @@ internal final class CustomInputField: UITextField {
     /// - seeAlso: CustomInputSelectionDelegate
     weak var selectionDelegate: CustomInputSelectionDelegate?
 
+    /// Indicates if input should be masked.
     internal var isSecureMode: Bool = false {
         didSet {
             updateLabels()
+        }
+    }
+
+    /// Indicates if input should be checked for valid date value.
+    internal var validatesDateInput: Bool = false {
+        didSet {
+            validateDate()
         }
     }
 
@@ -48,13 +56,16 @@ internal final class CustomInputField: UITextField {
     internal var separator: String = " " {
         didSet {
             updateLabels()
+            if validatesDateInput {
+                dateFormatter.dateFormat = "MM\(secureSeparator)YY"
+            }
         }
     }
 
     /// Character used as input empty character.
     internal var emptyCharacter: String = "x" {
-       didSet {
-           updateLabels()
+        didSet {
+            updateLabels()
        }
    }
 
@@ -85,12 +96,14 @@ internal final class CustomInputField: UITextField {
         return separator
     }
 
-   /// Indicates maximum length of input.
-   private let digitsLimit: Int
+    /// Indicates maximum length of input.
+    private let digitsLimit: Int
 
-   /// Indicates format of card number, e.g. [4, 3] means that number of length 7 will be split
-   /// into two parts of length 4 and 3 respectively (XXXX XXX).
-   private let chunkLengths: [Int]
+    /// Indicates format of card number, e.g. [4, 3] means that number of length 7 will be split
+    /// into two parts of length 4 and 3 respectively (XXXX XXX).
+    private let chunkLengths: [Int]
+
+    private lazy var dateFormatter = DateFormatter()
 
     // MARK: Hierarchy
 
@@ -156,6 +169,7 @@ internal final class CustomInputField: UITextField {
         setupLayoutConstraints()
         setupProperties()
         updateLabels()
+        setupBindings()
     }
 
     required init?(coder: NSCoder) {
@@ -192,8 +206,11 @@ internal final class CustomInputField: UITextField {
         addGestureRecognizer(self.tapGestureRecognizer)
         subviews.forEach { $0.isHidden = true }
         labelsStackView.isHidden = false
+    }
 
+    private func setupBindings() {
         addTarget(self, action: #selector(updateLabels), for: .editingChanged)
+        addTarget(self, action: #selector(validateDate), for: .editingDidEnd)
     }
 
     // MARK: Private
@@ -220,6 +237,18 @@ internal final class CustomInputField: UITextField {
         }
     }
 
+    @objc private func validateDate() {
+        guard validatesDateInput, var input = text else { return }
+        if input.count < 3 {
+            text = ""
+        } else {
+            input.insert(contentsOf: secureSeparator, at: input.index(input.startIndex, offsetBy: 2))
+            if dateFormatter.date(from: input) == nil {
+                text = ""
+            }
+        }
+        sendActions(for: .editingChanged)
+    }
 }
 
 // MARK: UITextFieldDelegate

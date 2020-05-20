@@ -61,6 +61,7 @@ public class CardInputsView: UIScrollView {
 
     internal lazy var validityDateField: CardInputField = {
         let textField = CardInputField(title: "Validity Date", inputLimit: 5, isDateInput: true)
+        textField.validatesDateInput = true
         textField.inputField.keyboardType = .decimalPad
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setupTextFieldToolbar(
@@ -97,6 +98,13 @@ public class CardInputsView: UIScrollView {
     public var isSecureInput: Bool = false {
         willSet {
             CVVNumberField.inputField.isSecureTextEntry = newValue
+        }
+    }
+
+    /// Indicates if Validity Date input is validated when retrieving data.
+    public var validatesDateInput: Bool = true {
+        willSet {
+            validityDateField.validatesDateInput = newValue
         }
     }
 

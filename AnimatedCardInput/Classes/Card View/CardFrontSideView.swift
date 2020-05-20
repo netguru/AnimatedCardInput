@@ -80,6 +80,7 @@ final class CardFrontSideView: CardSideView {
             digitsLimit: 4,
             chunkLengths: [2, 2]
         )
+        textField.validatesDateInput = true
         textField.separator = "/"
         textField.customPlaceholder = "MM/YY"
         textField.font = .systemFont(ofSize: 14)
