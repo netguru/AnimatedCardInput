@@ -485,6 +485,7 @@ extension CardView: CreditCardDataDelegate {
     /// - SeeAlso: CreditCardDataDelegate.cardholderNameChanged(name:)
     public func cardholderNameChanged(_ name: String) {
         frontSideContainer.cardholderNameField.text = name
+        frontSideContainer.cardholderNameField.sendActions(for: .editingChanged)
     }
 
     /// - SeeAlso: CreditCardDataDelegate.validityDateChanged(date:)
