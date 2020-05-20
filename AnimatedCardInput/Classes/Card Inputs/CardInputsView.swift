@@ -171,6 +171,9 @@ public class CardInputsView: UIScrollView {
         set(color) { updateBorderColor(color) }
     }
 
+    /// Character used as the Validity Date Separator - defaults to "/".
+    public var validityDateSeparator: String = "/"
+
     // MARK: Initializers
 
     /// Initializes CardInputsView.
@@ -341,7 +344,7 @@ public class CardInputsView: UIScrollView {
 
     @objc private func validityDateEditingChanged() {
         guard let newValue = validityDateField.inputField.text else { return }
-        creditCardDataDelegate?.validityDateChanged(newValue.replacingOccurrences(of: "/", with: ""))
+        creditCardDataDelegate?.validityDateChanged(newValue.replacingOccurrences(of: validityDateSeparator, with: ""))
     }
 
     @objc private func CVVNumberEditingChanged() {
@@ -407,7 +410,7 @@ extension CardInputsView: CreditCardDataDelegate {
     public func validityDateChanged(_ date: String) {
         var formattedDate = date
         if formattedDate.count > 2 {
-            formattedDate.insert("/", at: formattedDate.index(formattedDate.startIndex, offsetBy: 2))
+            formattedDate.insert(contentsOf: validityDateSeparator, at: formattedDate.index(formattedDate.startIndex, offsetBy: 2))
         }
         validityDateField.inputField.text = formattedDate
     }

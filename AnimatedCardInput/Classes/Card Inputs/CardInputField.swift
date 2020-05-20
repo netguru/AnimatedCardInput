@@ -16,6 +16,9 @@ public final class CardInputField: UIView {
     /// Indictes if input should be formatted as date.
     private let isDateInput: Bool
 
+    /// Character used as date value separator.
+    private let dateSeparator: String
+
     // MARK: Hierarchy
 
     /// Label with title for Input Field.
@@ -55,13 +58,16 @@ public final class CardInputField: UIView {
     ///     - title: Text to display as title above `Text Field`.
     ///     - inputLimit: Maximum number of characters for this input. Defaults to 0 (unlimited)
     ///     - isDateInput: Indictes if input should be formatted as date. Defaults to false.
+    ///     - dateSeparator: Character used as date separator. Defaults to `/`
     init(
         title: String,
         inputLimit: Int = 0,
-        isDateInput: Bool = false
+        isDateInput: Bool = false,
+        dateSeparator: String = "/"
     ) {
         self.inputLimit = inputLimit
         self.isDateInput = isDateInput
+        self.dateSeparator = dateSeparator
         super.init(frame: .zero)
 
         titleLabel.text = title
@@ -148,7 +154,7 @@ extension CardInputField: UITextFieldDelegate {
             currentText.count == 2,
             currentText.count < updatedText.count
         {
-            textField.text = currentText + "/"
+            textField.text = currentText + dateSeparator
         }
         return inputLimit == 0 || updatedText.count <= inputLimit
     }
