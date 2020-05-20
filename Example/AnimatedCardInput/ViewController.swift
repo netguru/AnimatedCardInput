@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         view.frontSideTextColor = .white
         view.CVVBackgroundColor = .white
         view.backSideTextColor = .black
+        view.isSecureInput = true
 
         view.numberInputFont = UIFont.systemFont(ofSize: 24, weight: .semibold)
         view.nameInputFont = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
     private let inputsView: CardInputsView = {
         let view = CardInputsView(cardNumberDigitLimit: 16)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isSecureInput = true
         return view
     }()
 

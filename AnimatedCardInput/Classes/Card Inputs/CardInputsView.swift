@@ -93,6 +93,13 @@ public class CardInputsView: UIScrollView {
     /// - seeAlso: CreditCardDataDelegate
     public weak var creditCardDataDelegate: CreditCardDataDelegate?
 
+    /// Indicates if CVV Number should be masked.
+    public var isSecureInput: Bool = false {
+        willSet {
+            CVVNumberField.inputField.isSecureTextEntry = newValue
+        }
+    }
+
     private let cardNumberDigitLimit: Int
 
     private let unfocusedFieldAlpha: CGFloat = 0.6

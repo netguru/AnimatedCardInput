@@ -13,7 +13,7 @@ protocol CustomInputSelectionDelegate: class {
 /// Custom Text Field used for displaying user input directly on Credit Card.
 internal final class CustomInputField: UITextField {
 
-    // MARK: Properties
+    // MARK: Properties overrides
 
     /// Color of displayed text.
     override var textColor: UIColor? {
@@ -33,12 +33,16 @@ internal final class CustomInputField: UITextField {
         }
     }
 
-    /// Indicates maximum length of input.
-    private let digitsLimit: Int
+    // MARK: Properties
 
-    /// Indicates format of card number, e.g. [4, 3] means that number of length 7 will be split
-    /// into two parts of length 4 and 3 respectively (XXXX XXX).
-    private let chunkLengths: [Int]
+    /// - seeAlso: CustomInputSelectionDelegate
+    weak var selectionDelegate: CustomInputSelectionDelegate?
+
+    internal var isSecureMode: Bool = false {
+        didSet {
+            updateLabels()
+        }
+    }
 
     /// Character used as input chunks separator.
     internal var separator: String = " " {
@@ -46,22 +50,13 @@ internal final class CustomInputField: UITextField {
             updateLabels()
         }
     }
-    /// Separator value that for sure is not a number and contains only one character.
-    private var secureSeparator: String {
-        guard
-            !separator.isEmpty,
-            separator.count == 1,
-            separator.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil
-        else { return " " }
-        return separator
-    }
 
     /// Character used as input empty character.
     internal var emptyCharacter: String = "x" {
-           didSet {
-               updateLabels()
-           }
+       didSet {
+           updateLabels()
        }
+   }
 
     /// Empty Character value that for sure is not a number and contains only one character.
     internal var safeEmptyCharacter: String {
@@ -75,13 +70,27 @@ internal final class CustomInputField: UITextField {
 
     /// String used as custom placeholder instead of Empty Character.
     internal var customPlaceholder: String? {
-           didSet {
-               updateLabels()
-           }
+       didSet {
+           updateLabels()
        }
+   }
 
-    /// - seeAlso: CustomInputSelectionDelegate
-    weak var selectionDelegate: CustomInputSelectionDelegate?
+    /// Separator value that for sure is not a number and contains only one character.
+    private var secureSeparator: String {
+        guard
+            !separator.isEmpty,
+            separator.count == 1,
+            separator.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil
+        else { return " " }
+        return separator
+    }
+
+   /// Indicates maximum length of input.
+   private let digitsLimit: Int
+
+   /// Indicates format of card number, e.g. [4, 3] means that number of length 7 will be split
+   /// into two parts of length 4 and 3 respectively (XXXX XXX).
+   private let chunkLengths: [Int]
 
     // MARK: Hierarchy
 
@@ -206,7 +215,7 @@ internal final class CustomInputField: UITextField {
                     return chunkLengths.contains(it) ? secureSeparator : safeEmptyCharacter
                 }
             }()
-            label.text = it < text.count ? "\(text[text.index(text.startIndex, offsetBy: it)])" : customCharacter
+            label.text = it < text.count ? "\(isSecureMode ? "•" : text[text.index(text.startIndex, offsetBy: it)])" : customCharacter
             label.alpha = it < text.count ? 1 : 0.6
         }
     }

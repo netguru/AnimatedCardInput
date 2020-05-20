@@ -99,6 +99,13 @@ public final class CardView: UIView {
 
     // MARK: Configurable properties
 
+    /// Indicates if CVV Number should be masked.
+    public var isSecureInput: Bool = false {
+        willSet {
+            backSideContainer.CVVNumberField.isSecureMode = newValue
+        }
+    }
+
     /// Image for the current card's provider.
     public var cardProviderImage: UIImage? {
         get { frontSideContainer.cardProviderImage }
