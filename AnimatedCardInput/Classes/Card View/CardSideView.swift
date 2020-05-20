@@ -60,27 +60,8 @@ internal class CardSideView: UIView {
     /// Image for current card provider.
     internal var cardProviderImage: UIImage? {
         didSet {
-            if let image = cardProviderImage {
-                cardProviderView.image = cardProviderImage
-                cardProviderIconWidthConstraint?.isActive = false
-                cardProviderIconWidthConstraint = cardProviderView.widthAnchor.constraint(equalTo: cardProviderView.heightAnchor, multiplier: image.size.width / image.size.height)
-                cardProviderIconWidthConstraint?.priority = .required
-                cardProviderIconWidthConstraint?.isActive = true
-            }
-
-            UIViewPropertyAnimator.runningPropertyAnimator(
-                withDuration: cardProviderAnimationDuration,
-                delay: 0,
-                options: .curveEaseOut,
-                animations: {
-                    self.cardProviderView.alpha = self.cardProviderImage == nil ? 0 : 1
-                },
-                completion: { _ in
-                    if self.cardProviderImage == nil {
-                        self.cardProviderView.image = nil
-                    }
-                }
-            )
+            guard cardProviderImage != oldValue else { return }
+            animateCardProviderIcon()
         }
     }
 
@@ -123,5 +104,45 @@ internal class CardSideView: UIView {
     /// Informs Selection Delegate to finish editing.
     @objc private func finishEditing() {
         inputDelegate?.finishEditing()
+    }
+
+    private func animateCardProviderIcon() {
+        if let image = cardProviderImage {
+            cardProviderIconWidthConstraint?.isActive = false
+            cardProviderIconWidthConstraint = cardProviderView.widthAnchor.constraint(equalTo: cardProviderView.heightAnchor, multiplier: image.size.width / image.size.height)
+            cardProviderIconWidthConstraint?.priority = .required
+            cardProviderIconWidthConstraint?.isActive = true
+        }
+
+        let animator = UIViewPropertyAnimator(duration: cardProviderAnimationDuration, curve: .easeOut)
+        if cardProviderView.alpha > 0 {
+            animator.addAnimations {
+                self.cardProviderView.alpha = 0
+            }
+            if self.cardProviderImage != nil {
+                animator.addCompletion { _ in
+                    self.cardProviderView.image = self.cardProviderImage
+                    UIViewPropertyAnimator.runningPropertyAnimator(
+                        withDuration: self.cardProviderAnimationDuration,
+                        delay: 0,
+                        options: .curveEaseOut,
+                        animations: {
+                            self.cardProviderView.alpha = self.cardProviderImage == nil ? 0 : 1
+                        }
+                    )
+                }
+            }
+        } else {
+            cardProviderView.image = cardProviderImage
+            animator.addAnimations {
+                self.cardProviderView.alpha = self.cardProviderImage == nil ? 0 : 1
+            }
+        }
+        animator.addCompletion { _ in
+            if self.cardProviderImage == nil {
+                self.cardProviderView.image = nil
+            }
+        }
+        animator.startAnimation()
     }
 }
