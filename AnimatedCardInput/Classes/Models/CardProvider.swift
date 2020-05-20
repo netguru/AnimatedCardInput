@@ -78,7 +78,7 @@ public enum CardProvider {
                 return "diners_club.png"
             case .jcb:
                 return "jcb.png"
-        case .notRecognized:
+            case .notRecognized:
                 return ""
         }
     }

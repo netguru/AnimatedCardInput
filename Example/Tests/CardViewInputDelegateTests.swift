@@ -15,12 +15,12 @@ class CardViewInputDelegateTests: XCTestCase {
         super.setUp()
         sut = CardView()
         resourceBundle = {
-           let frameworkBundle = Bundle(for: CardView.self)
-           if let resourceBundlePath = frameworkBundle.path(forResource: "AnimatedCardInput", ofType: "bundle") {
-               return Bundle(path: resourceBundlePath)
-           }
-           return frameworkBundle
-       }()
+            let frameworkBundle = Bundle(for: CardView.self)
+            if let resourceBundlePath = frameworkBundle.path(forResource: "AnimatedCardInput", ofType: "bundle") {
+                return Bundle(path: resourceBundlePath)
+            }
+            return frameworkBundle
+        }()
     }
 
     func testUpdateCardProviderVisa() throws {

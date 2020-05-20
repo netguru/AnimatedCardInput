@@ -69,7 +69,7 @@ class ViewController: UIViewController {
             cardView,
             inputsView,
             retrieveButton,
-            previewTextView
+            previewTextView,
         ].forEach(view.addSubview)
 
         NSLayoutConstraint.activate([
@@ -103,4 +103,3 @@ class ViewController: UIViewController {
         previewTextView.text = "\(data.cardNumber)\n\(data.cardholderName)\n\(data.validityDate)\n\(data.CVVNumber)"
     }
 }
-

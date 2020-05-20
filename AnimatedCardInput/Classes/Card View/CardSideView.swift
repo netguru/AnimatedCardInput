@@ -87,7 +87,7 @@ internal class CardSideView: UIView {
     }
 
     /// Updates text color of all appropiate views.
-    internal func updateTextColor() { }
+    internal func updateTextColor() {}
 
     // MARK: Private
 
@@ -119,7 +119,7 @@ internal class CardSideView: UIView {
             animator.addAnimations {
                 self.cardProviderView.alpha = 0
             }
-            if self.cardProviderImage != nil {
+            if cardProviderImage != nil {
                 animator.addCompletion { _ in
                     self.cardProviderView.image = self.cardProviderImage
                     UIViewPropertyAnimator.runningPropertyAnimator(

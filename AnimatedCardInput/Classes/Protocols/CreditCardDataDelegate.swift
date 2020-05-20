@@ -4,7 +4,7 @@
 //
 
 /// Protocol used to inform paired views about input changes.
-public protocol CreditCardDataDelegate: class {
+public protocol CreditCardDataDelegate: AnyObject {
 
     /// Informs that user began input of data for given Field Type.
     /// Parameters:

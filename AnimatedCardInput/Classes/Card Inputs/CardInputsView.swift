@@ -199,7 +199,7 @@ public class CardInputsView: UIScrollView {
         setupTextFieldBindings()
     }
 
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -322,13 +322,13 @@ public class CardInputsView: UIScrollView {
 
     /// Informs Selection Delegate to progress to next Text Field.
     @objc private func nextTextField() {
-        guard let nextInput = TextFieldType.init(rawValue: currentInput.rawValue + 1) else { return }
+        guard let nextInput = TextFieldType(rawValue: currentInput.rawValue + 1) else { return }
         updateCurrentInput(to: nextInput)
     }
 
     /// Informs Selection Delegate to return to previous Text Field.
     @objc private func previousTextField() {
-        guard let prevInput = TextFieldType.init(rawValue: currentInput.rawValue - 1) else { return }
+        guard let prevInput = TextFieldType(rawValue: currentInput.rawValue - 1) else { return }
         updateCurrentInput(to: prevInput)
     }
 
@@ -436,7 +436,7 @@ extension CardInputsView: CreditCardDataProvider {
     /// - SeeAlso: CreditCardDataProvider.creditCardData
     public var creditCardData: CreditCardData {
         guard
-            let cardNumber =  cardNumberField.inputField.text,
+            let cardNumber = cardNumberField.inputField.text,
             let cardholderName = cardholderNameField.inputField.text,
             let validityDate = validityDateField.inputField.text,
             let CVVNumber = CVVNumberField.inputField.text

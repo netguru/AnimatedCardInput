@@ -17,7 +17,7 @@ final class CardBackSideView: CardSideView {
         textField.keyboardType = .decimalPad
         textField.backgroundColor = .white
         textField.font = UIFont.systemFont(ofSize: 20)
-        
+
         let nextButton = nextToolbarButton
         nextButton.isEnabled = false
         textField.inputAccessoryView = {
@@ -65,7 +65,7 @@ final class CardBackSideView: CardSideView {
 
     /// Initializes Card Side View.
     /// Parameters:
-    ///     - CVVNumberDigitsLimit: Indicates maximum length of CVV number. Defaults to 3. 
+    ///     - CVVNumberDigitsLimit: Indicates maximum length of CVV number. Defaults to 3.
     /// - seeAlso: CardSideView.init()
     init(CVVNumberDigitsLimit: Int = 3) {
         self.CVVNumberDigitsLimit = CVVNumberDigitsLimit
@@ -116,7 +116,7 @@ final class CardBackSideView: CardSideView {
     }
 
     /// - seeAlso: CardSideView.setupProperties()
-    override internal  func setupProperties() {
+    internal override func setupProperties() {
         super.setupProperties()
 
         isHidden = true
@@ -127,7 +127,7 @@ final class CardBackSideView: CardSideView {
     }
 
     /// - seeAlso: CardSideView.updateTextColor()
-    override internal  func updateTextColor() {
+    internal override func updateTextColor() {
         CVVNumberField.textColor = textColor
     }
 

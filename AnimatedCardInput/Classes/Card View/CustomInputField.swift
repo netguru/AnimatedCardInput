@@ -6,7 +6,7 @@
 import UIKit
 
 /// Protocol handling change of Text Field Selection
-protocol CustomInputSelectionDelegate: class {
+protocol CustomInputSelectionDelegate: AnyObject {
     func updateCurrentFieldSelection(to textField: UITextField)
 }
 
@@ -66,8 +66,8 @@ internal final class CustomInputField: UITextField {
     internal var emptyCharacter: String = "x" {
         didSet {
             updateLabels()
-       }
-   }
+        }
+    }
 
     /// Empty Character value that for sure is not a number and contains only one character.
     internal var safeEmptyCharacter: String {
@@ -81,10 +81,10 @@ internal final class CustomInputField: UITextField {
 
     /// String used as custom placeholder instead of Empty Character.
     internal var customPlaceholder: String? {
-       didSet {
-           updateLabels()
-       }
-   }
+        didSet {
+            updateLabels()
+        }
+    }
 
     /// Separator value that for sure is not a number and contains only one character.
     private var secureSeparator: String {
@@ -109,7 +109,7 @@ internal final class CustomInputField: UITextField {
 
     /// Collection of Labels that displays current input.
     private var inputLabels: [UILabel] {
-        self.labelsStackView.arrangedSubviews as? [CustomInputLabel] ?? []
+        labelsStackView.arrangedSubviews as? [CustomInputLabel] ?? []
     }
 
     /// Container for inputLabels that spaces them equally.
@@ -155,7 +155,7 @@ internal final class CustomInputField: UITextField {
             while secureChunkLengths.reduce(0, +) > digitsLimit {
                 secureChunkLengths = secureChunkLengths.dropLast()
             }
-            
+
             for index in 1..<secureChunkLengths.count {
                 secureChunkLengths[index] += secureChunkLengths[index - 1] + 1
             }
@@ -203,7 +203,7 @@ internal final class CustomInputField: UITextField {
         delegate = self
         tintColor = .clear
         textColor = .clear
-        addGestureRecognizer(self.tapGestureRecognizer)
+        addGestureRecognizer(tapGestureRecognizer)
         subviews.forEach { $0.isHidden = true }
         labelsStackView.isHidden = false
     }
@@ -267,7 +267,7 @@ extension CustomInputField: UITextFieldDelegate {
 // MARK: DigitInputLabel
 
 /// Label used for digit display in CustomInputField.
-fileprivate final class CustomInputLabel: UILabel {
+private final class CustomInputLabel: UILabel {
 
     // MARK: Initializers
 

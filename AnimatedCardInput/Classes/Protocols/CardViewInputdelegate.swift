@@ -4,7 +4,7 @@
 //
 
 /// Protocol for handling text field interactions.
-public protocol CardViewInputDelegate: class {
+public protocol CardViewInputDelegate: AnyObject {
 
     /// Informs `Card View` about currently selected field.
     /// Parameters:

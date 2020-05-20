@@ -50,7 +50,7 @@ final class CardFrontSideView: CardSideView {
             string: "Name Surname".uppercased(),
             attributes: [
                 .foregroundColor: textColor?.withAlphaComponent(0.6) ?? .clear,
-                .font: UIFont.systemFont(ofSize: 14)
+                .font: UIFont.systemFont(ofSize: 14),
             ]
         )
         textField.tintColor = .clear
@@ -112,7 +112,7 @@ final class CardFrontSideView: CardSideView {
     ///     - cardNumberChunkLengths: Indicates format of card number,
     ///                               e.g. [4, 3] means that number of length 7 will be split
     ///                               into two parts of length 4 and 3 respectively (XXXX XXX).
-    /// - seeAlso: CardSideView.init()                               
+    /// - seeAlso: CardSideView.init()
     init(
         cardNumberDigitsLimit: Int = 16,
         cardNumberChunkLengths: [Int] = [4, 4, 4, 4]
@@ -173,9 +173,9 @@ final class CardFrontSideView: CardSideView {
     }
 
     /// - seeAlso: CardSideView.setupProperties()
-    override internal func setupProperties() {
+    internal override func setupProperties() {
         super.setupProperties()
-        
+
         textColor = .white
 
         cardNumberField.addTarget(self, action: #selector(updateCardProvider), for: .editingChanged)
@@ -187,11 +187,11 @@ final class CardFrontSideView: CardSideView {
     }
 
     /// - seeAlso: CardSideView.updateTextColor()
-    override internal func updateTextColor() {
+    internal override func updateTextColor() {
         [
             cardNumberField,
             cardholderNameField,
-            validityDateField
+            validityDateField,
         ].forEach {
             $0.textColor = textColor
         }
@@ -207,7 +207,7 @@ final class CardFrontSideView: CardSideView {
             string: (cardholderNameField.attributedPlaceholder?.string ?? "").uppercased(),
             attributes: [
                 .foregroundColor: textColor?.withAlphaComponent(0.5) ?? .clear,
-                .font: cardholderNameField.font ?? UIFont.systemFont(ofSize: 14)
+                .font: cardholderNameField.font ?? UIFont.systemFont(ofSize: 14),
             ]
         )
     }

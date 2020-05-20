@@ -2,7 +2,7 @@ import XCTest
 import AnimatedCardInput
 
 class CreditCardDataProvider: XCTestCase {
-    
+
     func testRetrievingCreditCardDataFromCardView() {
         let sut = CardView()
         XCTAssertNotNil(sut.creditCardData)

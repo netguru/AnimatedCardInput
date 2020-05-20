@@ -92,7 +92,7 @@ public final class CardView: UIView {
             if (currentInput != oldValue) && (currentInput == .CVVNumber && backSideContainer.isHidden) || (currentInput != .CVVNumber && frontSideContainer.isHidden) {
                 flip()
             } else {
-                self.updateIndicator(animated: true)
+                updateIndicator(animated: true)
             }
         }
     }
@@ -154,7 +154,7 @@ public final class CardView: UIView {
 
     /// Border color of a selected field indicator - defaults to #ff8000.
     public var selectionIndicatorColor: UIColor? {
-        get { UIColor(cgColor: selectionIndicator.layer.borderColor  ?? UIColor.clear.cgColor) }
+        get { UIColor(cgColor: selectionIndicator.layer.borderColor ?? UIColor.clear.cgColor) }
         set(color) { selectionIndicator.layer.borderColor = color?.cgColor }
     }
 
@@ -202,7 +202,7 @@ public final class CardView: UIView {
     /// Character used as the Card Number Separator - defaults to " ".
     public var cardNumberSeparator: String {
         get { frontSideContainer.cardNumberField.separator }
-        set(separator) { frontSideContainer.cardNumberField.separator = separator}
+        set(separator) { frontSideContainer.cardNumberField.separator = separator }
     }
 
     /// Character used as the Card Number Empty Character - defaults to "X".
@@ -265,7 +265,7 @@ public final class CardView: UIView {
         setupTextFieldBindings()
     }
 
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -327,7 +327,7 @@ public final class CardView: UIView {
         transform.m34 = 1.0 / 500.0
 
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration / 2, delay: 0, options: .curveLinear, animations: {
-            transform = CATransform3DRotate(transform, (self.backSideContainer.isHidden ? 1 : -1) * CGFloat.pi / 2, 0, (self.backSideContainer.isHidden ? 1 : -1), 0)
+            transform = CATransform3DRotate(transform, (self.backSideContainer.isHidden ? 1 : -1) * CGFloat.pi / 2, 0, self.backSideContainer.isHidden ? 1 : -1, 0)
             self.layer.transform = transform
         }, completion: { _ in
             self.frontSideContainer.isHidden.toggle()
@@ -338,10 +338,10 @@ public final class CardView: UIView {
             } else {
                 self.frontSideContainer.insertSubview(self.selectionIndicator, at: 0)
             }
-           self.updateIndicator(animated: false)
+            self.updateIndicator(animated: false)
 
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration / 2, delay: 0, options: .curveLinear, animations: {
-                transform = CATransform3DRotate(transform, CGFloat.pi / 2, 0, (self.backSideContainer.isHidden ? -1 : 1), 0)
+                transform = CATransform3DRotate(transform, CGFloat.pi / 2, 0, self.backSideContainer.isHidden ? -1 : 1, 0)
                 self.layer.transform = transform
             })
         })
@@ -421,10 +421,9 @@ extension CardView: CardViewInputDelegate {
                 self.selectionIndicator.frame = newFrame.insetBy(dx: -8, dy: -4)
             })
         } else {
-            self.selectionIndicator.frame = newFrame.insetBy(dx: -8, dy: -4)
+            selectionIndicator.frame = newFrame.insetBy(dx: -8, dy: -4)
         }
     }
-
 
     /// Updates current selection to given type.
     /// Parameters:
@@ -436,13 +435,13 @@ extension CardView: CardViewInputDelegate {
 
     /// Changes current selection to next Text Field in flow if possible.
     public func moveToNextTextField() {
-        guard let nextInput = TextFieldType.init(rawValue: currentInput.rawValue + 1) else { return }
+        guard let nextInput = TextFieldType(rawValue: currentInput.rawValue + 1) else { return }
         updateCurrentInput(to: nextInput)
     }
 
     /// Changes current selection to previous Text Field in flow if possible.
     public func moveToPreviousTextField() {
-        guard let prevInput = TextFieldType.init(rawValue: currentInput.rawValue - 1) else { return }
+        guard let prevInput = TextFieldType(rawValue: currentInput.rawValue - 1) else { return }
         updateCurrentInput(to: prevInput)
     }
 
@@ -463,7 +462,7 @@ extension CardView: CardViewInputDelegate {
     }
 
     public func updateSelectionIndicator() {
-        self.updateIndicator(animated: true)
+        updateIndicator(animated: true)
     }
 }
 
