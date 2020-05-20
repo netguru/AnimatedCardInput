@@ -28,6 +28,7 @@
 		93C1F4DA11E891051885ECEB288182FC /* Pods-AnimatedCardInput_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 257A5C571F6681EF53285F2BD8634432 /* Pods-AnimatedCardInput_Example-dummy.m */; };
 		9E7909FD0B446C02493D67CBBCF3263E /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = 214AF5EE48E8E6ABEF6361CB1AAC8751 /* jcb.png */; };
 		A7420FAE9F3C8807A9CF1EF10E36EAF9 /* CardInputsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69FD8B3C2EED7A7D71621C55F24551 /* CardInputsView.swift */; };
+		AE3A18D124751C3D00E37996 /* CardProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3A18D024751C3D00E37996 /* CardProvider.swift */; };
 		B1C333DC25E965211044F6194A960F57 /* american_express.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE760C45C99FE0A7E5A885D3FC8728B /* american_express.png */; };
 		B630142F98DEAF4A823DC21B1B8D8A08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		B8AB70ADDC40CA3E914A6B457D16B91F /* AnimatedCardInput.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09C56BD0600A719DE27AFEDEB05EE9 /* AnimatedCardInput.bundle */; };
@@ -96,6 +97,7 @@
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A4BFCF72E08380ABAC0EA69C4A7C47FD /* CardViewInputdelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CardViewInputdelegate.swift; sourceTree = "<group>"; };
 		A6941A179B85993704B03AEC2BC1279E /* CardInputField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CardInputField.swift; sourceTree = "<group>"; };
+		AE3A18D024751C3D00E37996 /* CardProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProvider.swift; sourceTree = "<group>"; };
 		AE47E84AA69FC40CEAD227C609802789 /* Pods_AnimatedCardInput_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimatedCardInput_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD5AD7D752D4FFD8C0A000BC99510DEC /* Pods-AnimatedCardInput_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AnimatedCardInput_Example-frameworks.sh"; sourceTree = "<group>"; };
 		C163B37F26C037F27560B808461B09D6 /* CardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				7351EFF4E5D0F41A72BDF694C9CDD741 /* CreditCardData.swift */,
 				55C46C86E8697B09A41427A91EB234CA /* TextFieldType.swift */,
+				AE3A18D024751C3D00E37996 /* CardProvider.swift */,
 			);
 			name = Models;
 			path = AnimatedCardInput/Classes/Models;
@@ -531,6 +534,7 @@
 			files = (
 				57FC65D472B85CAF69E9FC9E2B06D684 /* AnimatedCardInput-dummy.m in Sources */,
 				E00412C8A0A333679EB9E9212E008CE6 /* CardBackSideView.swift in Sources */,
+				AE3A18D124751C3D00E37996 /* CardProvider.swift in Sources */,
 				BB0AC430C23ED08B8958CB3FA08F6F59 /* CardFrontSideView.swift in Sources */,
 				734E9A705170E442159697091C128381 /* CardInputField.swift in Sources */,
 				A7420FAE9F3C8807A9CF1EF10E36EAF9 /* CardInputsView.swift in Sources */,

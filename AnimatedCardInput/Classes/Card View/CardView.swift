@@ -63,6 +63,13 @@ public final class CardView: UIView {
     /// - seeAlso: CreditCardDataDelegate
     public weak var creditCardDataDelegate: CreditCardDataDelegate?
 
+    /// Card Provider for current input of Card Number.
+    public var currentCardProvider: CardProvider = .notRecognized {
+        willSet {
+            cardProviderImage = newValue.icon
+        }
+    }
+
     private var shouldTextFieldsBecomeFirstResponder: Bool = true
 
     /// Indicates which Text Field is currently selected.
@@ -89,14 +96,6 @@ public final class CardView: UIView {
             }
         }
     }
-
-    private lazy var resourceBundle: Bundle? = {
-        let frameworkBundle = Bundle(for: CardView.self)
-        if let resourceBundlePath = frameworkBundle.path(forResource: "AnimatedCardInput", ofType: "bundle") {
-            return Bundle(path: resourceBundlePath)
-        }
-        return frameworkBundle
-    }()
 
     // MARK: Configurable properties
 
@@ -443,47 +442,10 @@ extension CardView: CardViewInputDelegate {
     }
 
     /// Updates Card Provider icon based on Card number input.
+    /// Parameters:
+    ///     - cardNumber: Card number for provider recognition.
     public func updateCardProvider(cardNumber: String) {
-        cardProviderImage = {
-            guard let firstNumber = cardNumber.first else { return nil }
-            switch firstNumber {
-                /// VISA starts with `4`.
-                case "4":
-                    return UIImage(named: "visa.png", in: resourceBundle, compatibleWith: nil)
-
-                /// MasterCard  starts with `5`.
-                case "5":
-                    return UIImage(named: "mastercard.png", in: resourceBundle, compatibleWith: nil)
-
-                /// Discover starts with `6`.
-                case "6":
-                    return UIImage(named: "discover.png", in: resourceBundle, compatibleWith: nil)
-
-                case "3":
-                    guard cardNumber.count > 1 else { return nil }
-                    let secondNumber = cardNumber[cardNumber.index(cardNumber.startIndex, offsetBy: 1)]
-                    switch secondNumber {
-                        /// American Express starts with `34` or `37`.
-                        case "4", "7":
-                            return UIImage(named: "american_express.png", in: resourceBundle, compatibleWith: nil)
-
-                        /// Diners Club starts with `30`, `36` or `38`
-                        case "0", "6", "8":
-                            return UIImage(named: "diners_club.png", in: resourceBundle, compatibleWith: nil)
-
-                        /// JCB starts with `35`
-                        case "5":
-                            return UIImage(named: "jcb.png", in: resourceBundle, compatibleWith: nil)
-
-                        default:
-                            return nil
-                    }
-
-                /// Not supported card number.
-                default:
-                    return nil
-            }
-        }()
+        currentCardProvider = CardProvider(cardNumber: cardNumber)
     }
 
     public func updateSelectionIndicator() {
