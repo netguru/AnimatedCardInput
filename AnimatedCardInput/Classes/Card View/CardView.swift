@@ -507,7 +507,7 @@ extension CardView: CreditCardDataProvider {
             return CreditCardData()
         }
         if validityDate.count > 2 {
-            validityDate.insert("/", at: validityDate.index(validityDate.startIndex, offsetBy: 2))
+            validityDate.insert(contentsOf: validityDateSeparator, at: validityDate.index(validityDate.startIndex, offsetBy: 2))
         }
         return CreditCardData(
             cardNumber: cardNumber,
