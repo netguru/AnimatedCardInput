@@ -95,6 +95,12 @@ cardInputsView.creditCardDataDelegate = cardView
 ```
 From now on both inputs will update to the same data and step in the filling flow.
 
+## Roadmap
+* [ ] Labels localisation.
+* [ ] Adding new, custom credit card providers with icons.
+* [ ] Validation errors displayed on the inputs.
+* [ ] Even more...
+
 ## About
 
 This project is made with ❤️ by [Netguru](https://netguru.com) and maintained by [Kamil Szczepański](https://github.com/krysztalzg).
