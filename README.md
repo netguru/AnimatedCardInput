@@ -49,7 +49,7 @@ NSLayoutConstraint.activate([...])
 ```
 We can customise our card view in almost every way. Starting with the design, both fonts and color can be adjusted. Here's a list of all available properties that can be changed.
 
-* `isSecureInput` - Enables masking ov CVV number (defaults to false).
+* `isSecureInput` - Enables masking of CVV number (defaults to false).
 * `validatesDateInput` - Enables validation on Validity Date Field (defaults to true).
 * `frontSideCardColor` - Background color of the card's front side (defaults to #373737).
 * `frontSideTextColor` - Text color of the card's front side (defaults to #FFFFFF).
