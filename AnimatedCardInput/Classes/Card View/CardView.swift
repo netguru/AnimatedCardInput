@@ -229,6 +229,24 @@ public final class CardView: UIView {
         set(emptyCharacter) { backSideContainer.CVVNumberField.emptyCharacter = emptyCharacter }
     }
 
+    /// Custom string for title label of Cardholder Name input.
+    public var cardholderNameTitle: String? {
+        get { frontSideContainer.cardholderNameLabel.text  }
+        set(text) { frontSideContainer.cardholderNameLabel.text = text }
+    }
+
+    /// Custom string for placeholder of Cardholder Name input.
+    public var cardholderNamePlaceholder: String? {
+        get { frontSideContainer.cardholderNameField.placeholder }
+        set(text) { frontSideContainer.cardholderNameField.placeholder = text }
+    }
+
+    /// Custom string for title label of Validity Date input.
+    public var validityDateTitle: String? {
+        get { frontSideContainer.validityDateLabel.text }
+        set(text) { frontSideContainer.validityDateLabel.text = text }
+    }
+
     /// Indicates maximum length of Card Number Text Field.
     private let cardNumberDigitsLimit: Int
 

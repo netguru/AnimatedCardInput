@@ -179,6 +179,30 @@ public class CardInputsView: UIScrollView {
         set(color) { updateBorderColor(color) }
     }
 
+    /// Custom string for title label of Card Number input.
+    public var cardNumberTitle: String? {
+        get { cardNumberField.titleLabel.text }
+        set(text) { cardNumberField.titleLabel.text = text }
+    }
+
+    /// Custom string for title label of Cardholder Name input.
+    public var cardholderNameTitle: String? {
+        get { cardholderNameField.titleLabel.text }
+        set(text) { cardholderNameField.titleLabel.text = text }
+    }
+
+    /// Custom string for title label of Validity Date input.
+    public var validityDateTitle: String? {
+        get { validityDateField.titleLabel.text }
+        set(text) { validityDateField.titleLabel.text = text }
+    }
+
+    /// Custom string for title label of CVV Number input.
+    public var cvvNumberTitle: String? {
+        get { CVVNumberField.titleLabel.text }
+        set(text) { CVVNumberField.titleLabel.text = text }
+    }
+
     /// Character used as the Validity Date Separator - defaults to "/".
     public var validityDateSeparator: String = "/"
 
