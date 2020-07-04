@@ -64,9 +64,9 @@ public final class CardView: UIView {
     public weak var creditCardDataDelegate: CreditCardDataDelegate?
 
     /// Card Provider for current input of Card Number.
-    public var currentCardProvider: CardProvider = .notRecognized {
+    private var currentCardProvider: CardProvider? {
         willSet {
-            cardProviderImage = newValue.icon
+            cardProviderImage = newValue?.icon
         }
     }
 
@@ -229,6 +229,24 @@ public final class CardView: UIView {
         set(emptyCharacter) { backSideContainer.CVVNumberField.emptyCharacter = emptyCharacter }
     }
 
+    /// Custom string for title label of Cardholder Name input.
+    public var cardholderNameTitle: String? {
+        get { frontSideContainer.cardholderNameLabel.text  }
+        set(text) { frontSideContainer.cardholderNameLabel.text = text }
+    }
+
+    /// Custom string for placeholder of Cardholder Name input.
+    public var cardholderNamePlaceholder: String? {
+        get { frontSideContainer.cardholderNameField.placeholder }
+        set(text) { frontSideContainer.cardholderNameField.placeholder = text }
+    }
+
+    /// Custom string for title label of Validity Date input.
+    public var validityDateTitle: String? {
+        get { frontSideContainer.validityDateLabel.text }
+        set(text) { frontSideContainer.validityDateLabel.text = text }
+    }
+
     /// Indicates maximum length of Card Number Text Field.
     private let cardNumberDigitsLimit: Int
 
@@ -242,7 +260,7 @@ public final class CardView: UIView {
     // MARK: Initializers
 
     /// Initializes Card View.
-    /// Parameters:
+    /// - Parameters:
     ///     - cardNumberDigitsLimit: Indicates maximum length of card number. Defaults to 16.
     ///     - cardNumberChunkLengths: Indicates format of card number,
     ///                               e.g. [4, 3] means that number of length 7 will be split
@@ -319,7 +337,7 @@ public final class CardView: UIView {
     // MARK: Private
 
     /// Performs aniamted rotation of Credit Card to show opposite side.
-    /// Parameters:
+    /// - Parameters:
     ///     - duration: Indicates how long should be the animation.
     private func flip(with duration: Double = 0.5) {
 
@@ -395,7 +413,7 @@ public final class CardView: UIView {
 extension CardView: CardViewInputDelegate {
 
     /// Updates frame of selection indicator to current Text Field.
-    /// Parameters:
+    /// - Parameters:
     ///     - animated: Indicates if update should be animated.
     func updateIndicator(animated: Bool) {
         selectionIndicator.isHidden = false
@@ -426,7 +444,7 @@ extension CardView: CardViewInputDelegate {
     }
 
     /// Updates current selection to given type.
-    /// Parameters:
+    /// - Parameters:
     ///     - type: TextFieldType value for selected Text Field.
     public func updateCurrentInput(to type: TextFieldType) {
         guard type != currentInput else { return }
@@ -455,10 +473,10 @@ extension CardView: CardViewInputDelegate {
     }
 
     /// Updates Card Provider icon based on Card number input.
-    /// Parameters:
+    /// - Parameters:
     ///     - cardNumber: Card number for provider recognition.
     public func updateCardProvider(cardNumber: String) {
-        currentCardProvider = CardProvider(cardNumber: cardNumber)
+        currentCardProvider = CardProvider.recognizeProvider(from: cardNumber)
     }
 
     public func updateSelectionIndicator() {
@@ -517,6 +535,7 @@ extension CardView: CreditCardDataProvider {
             validityDate.insert(contentsOf: validityDateSeparator, at: validityDate.index(validityDate.startIndex, offsetBy: 2))
         }
         return CreditCardData(
+            cardProvider: currentCardProvider,
             cardNumber: cardNumber,
             cardholderName: cardholderName,
             validityDate: validityDate,

@@ -114,6 +114,9 @@ public class CardInputsView: UIScrollView {
 
     private var shouldTextFieldsBecomeFirstResponder: Bool = true
 
+    /// Card Provider for current input of Card Number.
+    private var currentCardProvider: CardProvider?
+
     fileprivate var currentInput: TextFieldType = .cardNumber {
         didSet {
             switch currentInput {
@@ -177,6 +180,30 @@ public class CardInputsView: UIScrollView {
     public var inputBorderColor: CGColor? {
         get { cardNumberField.inputField.layer.borderColor }
         set(color) { updateBorderColor(color) }
+    }
+
+    /// Custom string for title label of Card Number input.
+    public var cardNumberTitle: String? {
+        get { cardNumberField.titleLabel.text }
+        set(text) { cardNumberField.titleLabel.text = text }
+    }
+
+    /// Custom string for title label of Cardholder Name input.
+    public var cardholderNameTitle: String? {
+        get { cardholderNameField.titleLabel.text }
+        set(text) { cardholderNameField.titleLabel.text = text }
+    }
+
+    /// Custom string for title label of Validity Date input.
+    public var validityDateTitle: String? {
+        get { validityDateField.titleLabel.text }
+        set(text) { validityDateField.titleLabel.text = text }
+    }
+
+    /// Custom string for title label of CVV Number input.
+    public var cvvNumberTitle: String? {
+        get { CVVNumberField.titleLabel.text }
+        set(text) { CVVNumberField.titleLabel.text = text }
     }
 
     /// Character used as the Validity Date Separator - defaults to "/".
@@ -343,6 +370,7 @@ public class CardInputsView: UIScrollView {
     @objc private func cardNumberEditingChanged() {
         guard let newValue = cardNumberField.inputField.text else { return }
         creditCardDataDelegate?.cardNumberChanged(newValue)
+        currentCardProvider = CardProvider.recognizeProvider(from: newValue)
     }
 
     @objc private func cardholderNameEditingChanged() {
@@ -444,6 +472,7 @@ extension CardInputsView: CreditCardDataProvider {
             return CreditCardData()
         }
         return CreditCardData(
+            cardProvider: currentCardProvider,
             cardNumber: cardNumber,
             cardholderName: cardholderName,
             validityDate: validityDate,

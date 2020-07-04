@@ -8,7 +8,7 @@ import Foundation
 public struct CreditCardData {
 
     /// Object representing card's provider.
-    public var cardProvider: CardProvider = .notRecognized
+    public var cardProvider: CardProvider?
 
     /// String representing Number of the Credit Card.
     public var cardNumber: String = ""

@@ -49,7 +49,7 @@ NSLayoutConstraint.activate([...])
 ```
 We can customise our card view in almost every way. Starting with the design, both fonts and color can be adjusted. Here's a list of all available properties that can be changed.
 
-* `isSecureInput` - Enables masking ov CVV number (defaults to false).
+* `isSecureInput` - Enables masking of CVV number (defaults to false).
 * `validatesDateInput` - Enables validation on Validity Date Field (defaults to true).
 * `frontSideCardColor` - Background color of the card's front side (defaults to #373737).
 * `frontSideTextColor` - Text color of the card's front side (defaults to #FFFFFF).
@@ -68,6 +68,9 @@ We can customise our card view in almost every way. Starting with the design, bo
 * `validityDateSeparator` - Character used as the Validity Date Separator (defaults to "/").
 * `validityDateCustomPlaceHolder` - Text used as the Validity Date Placeholder (defaults to "MM/YY").
 * `CVVNumberEmptyCharacter` - Character used as CVV Number Empty Character (defaults to "X").
+* `cardholderNameTitle` - Custom string to use for title label of Cardholder Name input.
+* `cardholderNamePlaceholder` - Custom string to use for placeholder of Cardholder Name input.
+* `validityDateTitle` - Custom string to use for title label of Validity Date input.
 
 ### Card Inputs View
 ![CardInputsViewCardholderName](https://user-images.githubusercontent.com/6009785/82155441-500f5880-9875-11ea-85f4-95920ff23e3d.png)
@@ -86,6 +89,10 @@ Input views can be customised all at once with following properties.
 * `titleFont` - Font of text in title label (defaults to System Light 12).
 * `inputColor` - Color of text in text field (defaults to #000000).
 * `inputFont` - Font of text in text field (defaults to System Regular 24).
+* `cardNumberTitle` - Custom string to use for title label of Card Number input.
+* `cardholderNameTitle` - Custom string to use for title label of Cardholder Name input.
+* `validityDateTitle` - Custom string to use for title label of Validity Date input.
+* `cvvNumberTitle` - Custom string to use for title label of CVV Code input.
 
 ### Connecting both components
 If we want users to input data either directly onto card or by selecting textfields we need to pair both components with `creditCardDataDelegate` property.
@@ -95,9 +102,16 @@ cardInputsView.creditCardDataDelegate = cardView
 ```
 From now on both inputs will update to the same data and step in the filling flow.
 
+### Adding new Card Providers
+If default card brands provided with this library are not enough for your needs, you can add your own Card Provider with custom name, icon and recognition pattern that will be used in regex (`"^\(pattern)\\d*"), eg. a fake _Cardinio_ provider that have card numbers starting with `92` or `95`:
+```swift
+let newCardProvider = CardProvider(name: "Cardinio", image: #imageLiteral(resourceName: "cardinio_icon"), pattern: "9[2,5]")
+CardProvider.addCardProviders(newCardProvider)
+```
+
 ## Roadmap
-* [ ] Labels localisation.
-* [ ] Adding new, custom credit card providers with icons.
+* [x] Labels localisation.
+* [x] Adding new, custom credit card providers with icons.
 * [ ] Validation errors displayed on the inputs.
 * [ ] Even more...
 

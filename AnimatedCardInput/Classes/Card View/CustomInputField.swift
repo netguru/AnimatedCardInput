@@ -137,7 +137,7 @@ internal final class CustomInputField: UITextField {
     // MARK: Initializers
 
     /// Initializes CustomInputField.
-    /// Parameters:
+    /// - Parameters:
     ///     - digitsLimit: Indicates maximum length of tet field input. Defaults to 16.
     ///     - chunkLengths: Indicates format of text field input,
     ///                     e.g. [4, 3] means that number of length 7 will be split
