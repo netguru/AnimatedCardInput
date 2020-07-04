@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AnimatedCardInput'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'iOS library with components for input of Credit Card data'
 
   s.description      = "This library let's you drop into your project an animated component representing Credit Card and allow users to enter their data directly onto it."
