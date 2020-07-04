@@ -3,83 +3,116 @@
 //  AnimatedCardInput
 //
 
-/// Possible Card Providers to dispaly icon on `Card View`.
-public enum CardProvider {
+/// Represents a provider of Credit Cards.
+public class CardProvider {
 
-    case visa
-    case mastercard
-    case discover
-    case americanExpress
-    case dinersClub
-    case jcb
-    /// When provider is not recognized from card number.
-    case notRecognized
+    // MARK: Parameters
 
-    /// Initializes `Card Provider` instance.
-    /// Parameters:
-    ///     - cardNumber: Card number for provider recognition.
-    init(cardNumber: String) {
-        guard let firstNumber = cardNumber.first else { self = .notRecognized; return }
-        switch firstNumber {
-            /// VISA starts with `4`.
-            case "4":
-                self = .visa
-            /// MasterCard  starts with `5`.
-            case "5":
-                self = .mastercard
-            /// Discover starts with `6`.
-            case "6":
-                self = .discover
-            case "3":
-                guard cardNumber.count > 1 else { self = .notRecognized; return }
-                let secondNumber = cardNumber[cardNumber.index(cardNumber.startIndex, offsetBy: 1)]
-                switch secondNumber {
-                    /// American Express starts with `34` or `37`.
-                    case "4", "7":
-                        self = .americanExpress
-                    /// Diners Club starts with `30`, `36` or `38`.
-                    case "0", "6", "8":
-                        self = .dinersClub
-                    /// JCB starts with `35`.
-                    case "5":
-                        self = .jcb
-                    default:
-                        self = .notRecognized
+    /// Name of Card Provider.
+    public let name: String
+
+    /// Icon with logo of Card Provider.
+    public let icon: UIImage?
+
+    /// String pattern for recognizing card brand from the card number.
+    private let pattern: String
+
+    /// Regular Expression for recognizing card brand from the card number.
+    private var regex: NSRegularExpression? {
+        try? NSRegularExpression(pattern: "^\(pattern)\\d*")
+    }
+
+    // MARK: Providers Collections
+
+    /// Collection of card providers added by the application.
+    public static var customCardProviders = Set<CardProvider>()
+
+    /// Collection of default Card Providers.
+    private static let defaultProfiders: [CardProvider] = [
+        /// VISA starts with `4`.
+        CardProvider(name: "Visa", assetName: "visa.png", pattern: "4"),
+        /// MasterCard starts with `5`.
+        CardProvider(name: "Mastercard", assetName: "mastercard.png", pattern: "5"),
+        /// Discover starts with `6`.
+        CardProvider(name: "Discover", assetName: "discover.png", pattern: "6"),
+        /// American Express starts with `34` or `37`.
+        CardProvider(name: "American Express", assetName: "american_express.png", pattern: "3[4,7]"),
+        /// Diners Club starts with `30`, `36` or `38`.
+        CardProvider(name: "Diners Club", assetName: "diners_club.png", pattern: "3[0,6,8]"),
+        /// JCB starts with `35`.
+        CardProvider(name: "JCB", assetName: "jcb.png", pattern: "35"),
+    ]
+
+    // MARK: Initializers
+
+    /// Initializes instance of Card Provider.
+    ///
+    /// - Parameters:
+    ///     - name: name of Card Provider.
+    ///     - icon: optional icon of Card Provider.
+    ///     - pattern: pattern for recognizing Card Provider from card number. This will be applied as a regex `^\(pattern)\\d*`.
+    init(name: String, icon: UIImage?, pattern: String) {
+        self.name = name
+        self.icon = icon
+        self.pattern = pattern
+    }
+
+    /// Initializes instance of default Card Provider.
+    /// - Parameters:
+    ///     - name: name of Card Provider.
+    ///     - assetName: name of asset for Card Provider icon.
+    ///     - pattern: pattern for recognizing Card Provider from card number.
+    private init(name: String, assetName: String, pattern: String) {
+        self.name = name
+        self.pattern = pattern
+        self.icon = {
+            let resourceBundle: Bundle? = {
+                let frameworkBundle = Bundle(for: CardView.self)
+                if let resourceBundlePath = frameworkBundle.path(forResource: "AnimatedCardInput", ofType: "bundle") {
+                    return Bundle(path: resourceBundlePath)
                 }
-            default:
-                self = .notRecognized
-        }
-    }
-
-    /// Icon for card provider.4
-    public var icon: UIImage? {
-        let resourceBundle: Bundle? = {
-            let frameworkBundle = Bundle(for: CardView.self)
-            if let resourceBundlePath = frameworkBundle.path(forResource: "AnimatedCardInput", ofType: "bundle") {
-                return Bundle(path: resourceBundlePath)
-            }
-            return frameworkBundle
+                return frameworkBundle
+            }()
+            return UIImage(named: assetName, in: resourceBundle, compatibleWith: nil)
         }()
-        guard self != .notRecognized else { return nil }
-        return UIImage(named: assetName, in: resourceBundle, compatibleWith: nil)
     }
 
-    private var assetName: String {
-        switch self {
-            case .visa:
-                return "visa.png"
-            case .mastercard:
-                return "mastercard.png"
-            case .discover:
-                return "discover.png"
-            case .americanExpress:
-                return "american_express.png"
-            case .dinersClub:
-                return "diners_club.png"
-            case .jcb:
-                return "jcb.png"
-            case .notRecognized:
-                return ""
+    // MARK: Static
+
+    /// Add custom providers to the collection used for recognition from card number.
+    /// - Parameters:
+    ///     - providers: Collection of custom providers to add for brand recognition.
+    public static func addCardProviders(_ providers: CardProvider...) {
+        providers.forEach { customCardProviders.insert($0) }
+    }
+
+    /// Recognizes `Card Provider` from the card number.
+    /// - Parameters:
+    ///     - cardNumber: Card Number to recognize from.
+    /// - Returns: `Card Provider` object if card number matches any of available patterns.
+    public static func recognizeProvider(from cardNumber: String) -> CardProvider? {
+        let range = NSRange(location: 0, length: cardNumber.utf16.count)
+        for provider in defaultProfiders + customCardProviders {
+            if provider.regex?.firstMatch(in: cardNumber, options: [], range: range) != nil {
+                return provider
+            }
         }
+        return nil
+    }
+}
+
+// MARK: Hashable
+
+extension CardProvider: Hashable {
+
+    /// - SeeAlso: Hashable.hash(into:)
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(pattern)
+    }
+
+    /// - SeeAlso: Equatable.==(lhs:, rhs:)
+    public static func == (lhs: CardProvider, rhs: CardProvider) -> Bool {
+        lhs.name == rhs.name && lhs.pattern == rhs.pattern
     }
 }

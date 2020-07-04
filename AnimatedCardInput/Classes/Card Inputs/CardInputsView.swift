@@ -114,6 +114,9 @@ public class CardInputsView: UIScrollView {
 
     private var shouldTextFieldsBecomeFirstResponder: Bool = true
 
+    /// Card Provider for current input of Card Number.
+    private var currentCardProvider: CardProvider?
+
     fileprivate var currentInput: TextFieldType = .cardNumber {
         didSet {
             switch currentInput {
@@ -367,6 +370,7 @@ public class CardInputsView: UIScrollView {
     @objc private func cardNumberEditingChanged() {
         guard let newValue = cardNumberField.inputField.text else { return }
         creditCardDataDelegate?.cardNumberChanged(newValue)
+        currentCardProvider = CardProvider.recognizeProvider(from: newValue)
     }
 
     @objc private func cardholderNameEditingChanged() {
@@ -468,6 +472,7 @@ extension CardInputsView: CreditCardDataProvider {
             return CreditCardData()
         }
         return CreditCardData(
+            cardProvider: currentCardProvider,
             cardNumber: cardNumber,
             cardholderName: cardholderName,
             validityDate: validityDate,

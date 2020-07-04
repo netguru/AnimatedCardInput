@@ -100,6 +100,13 @@ class ViewController: UIViewController {
 
     @objc private func retrieveTapped() {
         let data = cardView.creditCardData
-        previewTextView.text = "\(data.cardNumber)\n\(data.cardholderName)\n\(data.validityDate)\n\(data.CVVNumber)"
+        previewTextView.text =
+        """
+        \(data.cardProvider?.name ?? String())
+        \(data.cardNumber)
+        \(data.cardholderName)
+        \(data.validityDate)
+        \(data.CVVNumber)
+        """
     }
 }

@@ -107,7 +107,7 @@ final class CardFrontSideView: CardSideView {
     // MARK: Initializers
 
     /// Initializes Card Side View.
-    /// Parameters:
+    /// - Parameters:
     ///     - cardNumberDigitsLimit: Indicates maximum length of card number. Defaults to 16.
     ///     - cardNumberChunkLengths: Indicates format of card number,
     ///                               e.g. [4, 3] means that number of length 7 will be split

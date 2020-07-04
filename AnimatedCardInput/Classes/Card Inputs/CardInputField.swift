@@ -68,7 +68,7 @@ public final class CardInputField: UIView {
     // MARK: Initializers
 
     /// Initializes CardInputField.
-    /// Parameters:
+    /// - Parameters:
     ///     - title: Text to display as title above `Text Field`.
     ///     - inputLimit: Maximum number of characters for this input. Defaults to 0 (unlimited)
     ///     - isDateInput: Indictes if input should be formatted as date. Defaults to false.
@@ -105,7 +105,7 @@ public final class CardInputField: UIView {
     // MARK: Setup
 
     /// Setup Text Fields toolbar with custom buttons.
-    /// Paramteres:
+    /// - Parameters:
     ///     - finishToolbarButton: button for finishing the editing.
     ///     - previousToolbarButton: for returning to previous Text Field.
     ///     - nextToolbarButton: button for progressing to next Text Field.

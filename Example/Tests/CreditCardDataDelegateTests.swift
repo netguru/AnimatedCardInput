@@ -27,7 +27,7 @@ class CreditCardDataDelegateTests: XCTestCase {
 
     func testCardholderNameChanged() throws {
         sut.cardholderNameChanged("new carholder name")
-        XCTAssertEqual(sut.creditCardData.cardholderName, "new carholder name")
+        XCTAssertEqual(sut.creditCardData.cardholderName, "new carholder name".uppercased())
     }
 
     func testCardholderNameChangedEmptyString() throws {

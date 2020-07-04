@@ -7,7 +7,7 @@
 public protocol CardViewInputDelegate: AnyObject {
 
     /// Informs `Card View` about currently selected field.
-    /// Parameters:
+    /// - Parameters:
     ///     - type: type of selected field.
     func updateCurrentInput(to type: TextFieldType)
 
@@ -21,7 +21,7 @@ public protocol CardViewInputDelegate: AnyObject {
     func finishEditing()
 
     /// Informs `Card View` about card number changes used for updating card provider icon.
-    /// Parameters:
+    /// - Parameters:
     ///     - cardNumber: current input of `Card Number` field.
     func updateCardProvider(cardNumber: String)
 
